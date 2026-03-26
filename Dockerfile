@@ -15,20 +15,14 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /server
 
-RUN curl -L -v -o server.tar.gz \
+RUN curl -L -o server.tar.gz \
     "https://github.com/Koberecnikos/inifnite-rails-server-test/releases/download/0.4.2/InfiniteRailsServerLinux.tar.gz" \
-    && echo "=== VELIKOST SOUBORU ===" \
-    && ls -lh server.tar.gz \
-    && echo "=== OBSAH ARCHIVU ===" \
-    && tar -tzf server.tar.gz \
     && tar -xzf server.tar.gz \
     && rm server.tar.gz \
-    && echo "=== SOUBORY PO ROZBALENI ===" \
-    && ls -la \
-    && find . -name "*.x86_64" \
-    && chmod +x ./InfiniteRailsServerLinux.x86_64
+    && echo "=== STRUKTURA ===" \
+    && find . -type f | head -20
 
 EXPOSE 7777/udp
 EXPOSE 7777/tcp
 
-CMD ["./InfiniteRailsServerLinux.x86_64", "-batchmode", "-nographics", "-logFile", "/proc/1/fd/1"]
+CMD ["bash", "-c", "find /server -name 'InfiniteRailsServerLinux.x86_64' -exec chmod +x {} \\; -exec {} -batchmode -nographics -logFile /proc/1/fd/1 \\;"]
