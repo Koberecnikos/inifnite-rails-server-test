@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /server
 
 RUN curl -L -o server.tar.gz \
-    "https://github.com/Koberecnikos/inifnite-rails-server-test/releases/download/0.4.2/InfiniteRailsServerLinux.tar.gz" \
+    "https://github.com/Koberecnikos/infinite-rails-server-test/releases/download/0.4.2/InfiniteRailsServerLinux.tar.gz" \
     && tar -xzf server.tar.gz \
     && rm server.tar.gz
 
